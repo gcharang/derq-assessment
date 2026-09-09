@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 export const CountryTrafficResponseSchema = z
-  .object({
+  .strictObject({
     data: z.array(
-      z.object({
+      z.strictObject({
         countryCode: z.string(),
         countryName: z.string(),
         value: z.number(),
