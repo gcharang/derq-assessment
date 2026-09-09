@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Only format where a prettier config exists, so files outside apps/api are left alone.
+  "prettier.requireConfig": true
+}
