@@ -1,9 +1,9 @@
 {
   "apps/api/**/*.ts": [
-    "apps/api/node_modules/.bin/prettier --write",
+    "apps/api/node_modules/.bin/prettier --ignore-path apps/api/.prettierignore --write",
     "apps/api/node_modules/.bin/oxlint -c apps/api/oxlint.json --deny-warnings"
   ],
   "apps/api/**/*.{json,md,yml,yaml}": [
-    "apps/api/node_modules/.bin/prettier --write"
+    "apps/api/node_modules/.bin/prettier --ignore-path apps/api/.prettierignore --write"
   ]
 }

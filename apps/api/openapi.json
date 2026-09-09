@@ -18,7 +18,9 @@
           }
         },
         "summary": "Total road traffic per country",
-        "tags": ["traffic"]
+        "tags": [
+          "traffic"
+        ]
       }
     }
   },
@@ -55,12 +57,18 @@
                   "type": "number"
                 }
               },
-              "required": ["countryCode", "countryName", "value"],
+              "required": [
+                "countryCode",
+                "countryName",
+                "value"
+              ],
               "additionalProperties": false
             }
           }
         },
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "additionalProperties": false
       }
     }

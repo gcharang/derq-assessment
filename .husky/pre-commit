@@ -1,1 +1,7 @@
+# Regenerates and commits the openapi.json file when API source changes
+if git diff --cached --name-only | grep -q '^apps/api/src/'; then
+	npm --prefix apps/api run openapi:generate
+	git add apps/api/openapi.json
+fi
+
 npx lint-staged
