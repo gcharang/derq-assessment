@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/traffic/countries": {
+      "get": {
+        "operationId": "TrafficController_getCountryTraffic",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Total traffic distance per country",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountryTrafficResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Total road traffic per country",
+        "tags": ["traffic"]
+      }
+    }
+  },
+  "info": {
+    "title": "Derq Traffic API",
+    "description": "Road traffic volumes from a fixed snapshot of Eurostat road_tf_vehmov.",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "traffic",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CountryTrafficResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "countryCode": {
+                  "type": "string"
+                },
+                "countryName": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "required": ["countryCode", "countryName", "value"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["data"],
+        "additionalProperties": false
+      }
+    }
+  }
+}
