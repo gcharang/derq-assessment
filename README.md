@@ -4,7 +4,7 @@ A web application to represent road traffic data as interactive graphs.
 
 ## Requirements
 
-- Node 22 or newer
+- Node 24 or newer
 - curl and jq if you want to refetch the Eurostat snapshot
 
 ## Running the API
