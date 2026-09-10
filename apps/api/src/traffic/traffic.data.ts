@@ -23,6 +23,8 @@ export const COUNTRY_CODES = Object.keys(COUNTRY_NAMES) as CountryCode[];
 export const VEHICLE_NAMES: Record<VehicleCode, string> =
   snapshot.dimension.vehicle.category.label;
 
+export const VEHICLE_CODES = Object.keys(VEHICLE_NAMES) as VehicleCode[];
+
 export const UNIT = {
   code: UNIT_CODE,
   label: snapshot.dimension.unit.category.label[UNIT_CODE],

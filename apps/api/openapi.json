@@ -44,6 +44,88 @@
           "traffic"
         ]
       }
+    },
+    "/traffic/observations/{countryCode}/{vehicleCode}/{year}": {
+      "put": {
+        "operationId": "TrafficController_updateObservation",
+        "parameters": [
+          {
+            "name": "year",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "vehicleCode",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "enum": [
+                "TOTAL",
+                "LOR_RTRN",
+                "MOTO_MOP",
+                "CAR",
+                "BUS_MCO_TRO"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "countryCode",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "enum": [
+                "EE",
+                "ES",
+                "HU",
+                "RO",
+                "SE",
+                "CH"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "value"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The stored observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Observation"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create or replace a single observation",
+        "tags": [
+          "traffic"
+        ]
+      }
     }
   },
   "info": {
@@ -168,6 +250,32 @@
         "required": [
           "data",
           "meta"
+        ],
+        "additionalProperties": false
+      },
+      "Observation": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string"
+          },
+          "vehicleCode": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "countryCode",
+          "vehicleCode",
+          "year",
+          "value"
         ],
         "additionalProperties": false
       }

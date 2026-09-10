@@ -4,6 +4,7 @@ import type { Repository } from 'typeorm';
 import { TrafficObservation } from './traffic-observation.entity.js';
 import {
   CountryTrafficResponseSchema,
+  ObservationSchema,
   VehicleTrafficResponseSchema,
 } from './traffic.schemas.js';
 import { TrafficService } from './traffic.service.js';
@@ -27,6 +28,7 @@ function serviceReturning(rows: unknown[]): TrafficService {
 
   return new TrafficService({
     createQueryBuilder: () => builder,
+    upsert: async () => undefined,
   } as unknown as Repository<TrafficObservation>);
 }
 
@@ -51,6 +53,23 @@ describe('TrafficService', () => {
 
     expect(() => VehicleTrafficResponseSchema.parse(response)).not.toThrow();
     expect(response.data).toHaveLength(1);
+  });
+
+  it('returns the stored observation after an update', async () => {
+    const service = serviceReturning([]);
+
+    const stored = await service.updateObservation(
+      { countryCode: 'ES', vehicleCode: 'CAR', year: 2023 },
+      { value: 206577 },
+    );
+
+    expect(() => ObservationSchema.parse(stored)).not.toThrow();
+    expect(stored).toEqual({
+      countryCode: 'ES',
+      vehicleCode: 'CAR',
+      year: 2023,
+      value: 206577,
+    });
   });
 
   it('reports the year and unit the values are measured in', async () => {

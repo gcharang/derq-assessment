@@ -22,6 +22,7 @@ Current endpoints:
 
 - Country traffic: http://localhost:3000/traffic/countries
 - Vehicle type distribution: http://localhost:3000/traffic/vehicles
+- Update an observation: `PUT` http://localhost:3000/traffic/observations/ES/CAR/2023 with `{ "value": 206577 }`
 - Swagger UI: http://localhost:3000/docs
 - openapi.json: http://localhost:3000/docs-json
 

@@ -6,6 +6,9 @@ import { TOTAL_VEHICLE_CODE, UNIT } from './traffic.data.js';
 import { TrafficObservation } from './traffic-observation.entity.js';
 import type {
   CountryTrafficResponse,
+  Observation,
+  ObservationKey,
+  UpdateObservation,
   VehicleTrafficResponse,
 } from './traffic.schemas.js';
 
@@ -55,6 +58,19 @@ export class TrafficService {
       .getRawMany<VehicleTrafficResponse['data'][number]>();
 
     return { data, meta: this.meta() };
+  }
+
+  async updateObservation(
+    key: ObservationKey,
+    { value }: UpdateObservation,
+  ): Promise<Observation> {
+    await this.observations.upsert({ ...key, value }, [
+      'countryCode',
+      'vehicleCode',
+      'year',
+    ]);
+
+    return { ...key, value };
   }
 
   private meta() {
