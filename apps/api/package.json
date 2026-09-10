@@ -20,15 +20,19 @@
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --no-file-parallelism",
-    "openapi:generate": "npm run build && node dist/openapi/generate-openapi.js"
+    "openapi:generate": "npm run build && node dist/openapi/generate-openapi.js",
+    "db:seed": "npm run build && node dist/scripts/seed.js"
   },
   "dependencies": {
     "@nestjs/common": "^12.0.1",
     "@nestjs/core": "^12.0.1",
     "@nestjs/platform-express": "^12.0.1",
     "@nestjs/swagger": "^12.0.1",
+    "@nestjs/typeorm": "^12.0.1",
+    "pg": "^8.23.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "typeorm": "^1.1.1",
     "zod": "^4.5.4"
   },
   "devDependencies": {

@@ -1,24 +1,38 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
-import { CountryTrafficResponseSchema } from './traffic.schemas.js';
-import type { CountryTrafficResponse } from './traffic.schemas.js';
+import {
+  CountryTrafficResponseSchema,
+  VehicleTrafficResponseSchema,
+} from './traffic.schemas.js';
+import type {
+  CountryTrafficResponse,
+  VehicleTrafficResponse,
+} from './traffic.schemas.js';
+import { TrafficService } from './traffic.service.js';
 
 @ApiTags('traffic')
 @Controller('traffic')
 export class TrafficController {
+  constructor(private readonly trafficService: TrafficService) {}
+
   @Get('countries')
   @ApiOperation({ summary: 'Total road traffic per country' })
   @ApiOkResponse({
     description: 'Total traffic distance per country',
     standardSchema: CountryTrafficResponseSchema,
   })
-  getCountryTraffic(): CountryTrafficResponse {
-    return {
-      data: [
-        { countryCode: 'ES', countryName: 'Spain', value: 260299 },
-        { countryCode: 'CH', countryName: 'Switzerland', value: 66430 },
-      ],
-    };
+  getCountryTraffic(): Promise<CountryTrafficResponse> {
+    return this.trafficService.getCountryTraffic();
+  }
+
+  @Get('vehicles')
+  @ApiOperation({ summary: 'Traffic distribution by vehicle type' })
+  @ApiOkResponse({
+    description: 'Traffic distance per vehicle type, summed across countries',
+    standardSchema: VehicleTrafficResponseSchema,
+  })
+  getVehicleTraffic(): Promise<VehicleTrafficResponse> {
+    return this.trafficService.getVehicleTraffic();
   }
 }

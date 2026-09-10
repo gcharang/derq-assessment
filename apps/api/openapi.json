@@ -22,6 +22,28 @@
           "traffic"
         ]
       }
+    },
+    "/traffic/vehicles": {
+      "get": {
+        "operationId": "TrafficController_getVehicleTraffic",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Traffic distance per vehicle type, summed across countries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleTrafficResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Traffic distribution by vehicle type",
+        "tags": [
+          "traffic"
+        ]
+      }
     }
   },
   "info": {
@@ -64,10 +86,88 @@
               ],
               "additionalProperties": false
             }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "unitCode": {
+                "type": "string"
+              },
+              "unitLabel": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "year",
+              "unitCode",
+              "unitLabel"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
-          "data"
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "VehicleTrafficResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "vehicleCode": {
+                  "type": "string"
+                },
+                "vehicleName": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "vehicleCode",
+                "vehicleName",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "unitCode": {
+                "type": "string"
+              },
+              "unitLabel": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "year",
+              "unitCode",
+              "unitLabel"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "data",
+          "meta"
         ],
         "additionalProperties": false
       }

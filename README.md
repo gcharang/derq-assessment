@@ -5,19 +5,23 @@ A web application to represent road traffic data as interactive graphs.
 ## Requirements
 
 - Node 24 or newer
+- Docker (+ compose)
 - curl and jq if you want to refetch the Eurostat snapshot
 
 ## Running the API
 
 ```bash
+docker compose up -d
 cd apps/api
 npm install
+npm run db:seed # creates the schema and loads the data
 npm run start:dev
 ```
 
 Current endpoints:
 
-- Mock data: http://localhost:3000/traffic/countries
+- Country traffic: http://localhost:3000/traffic/countries
+- Vehicle type distribution: http://localhost:3000/traffic/vehicles
 - Swagger UI: http://localhost:3000/docs
 - openapi.json: http://localhost:3000/docs-json
 
@@ -34,8 +38,10 @@ apps/api/src/scripts/fetch-snapshot.sh
 ## Checks
 
 ```bash
+docker compose up -d
 cd apps/api
 npm run lint
-npm run build
 npm run format:check
+npm run build
+npm test
 ```

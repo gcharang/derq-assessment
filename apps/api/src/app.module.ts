@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { databaseOptions } from './database.js';
 import { TrafficModule } from './traffic/traffic.module.js';
 
 @Module({
-  imports: [TrafficModule],
+  imports: [TypeOrmModule.forRoot(databaseOptions), TrafficModule],
 })
 export class AppModule {}
