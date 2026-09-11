@@ -36,6 +36,10 @@ The data extract is committed at `apps/api/src/traffic/data/road-tf-vehmov.json`
 apps/api/src/scripts/fetch-snapshot.sh
 ```
 
+## Scalability
+
+[docs/scalability.md](docs/scalability.md) covers 5, 50 and 500 RPS, with a baseline measured from `npm run load-test`.
+
 ## Checks
 
 ```bash
