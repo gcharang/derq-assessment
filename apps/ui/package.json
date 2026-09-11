@@ -10,7 +10,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "oxlint -c oxlint.json --deny-warnings app/",
-    "api:types": "openapi-typescript ../api/openapi.json -o app/api.types.ts"
+    "api:types": "openapi-typescript ../api/openapi.json -o app/api.types.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@react-router/node": "^8",
@@ -32,6 +34,7 @@
     "prettier": "^3.9.6",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
-    "vite": "^8.0.3"
+    "vite": "^8.0.3",
+    "vitest": "^4.1.11"
   }
 }
