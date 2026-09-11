@@ -8,10 +8,18 @@ A web application to represent road traffic data as interactive graphs.
 - Docker (+ compose)
 - curl and jq if you want to refetch the Eurostat snapshot
 
-## Running the API
+## Running everything
 
 ```bash
-docker compose up -d
+docker compose up -d --build
+```
+
+This command starts Postgres, seeds it with the data, and runs the API and the UI too.
+
+## Running the API for development
+
+```bash
+docker compose up -d postgres
 cd apps/api
 npm install
 npm run db:seed # creates the schema and loads the data
@@ -25,6 +33,7 @@ Current endpoints:
 - Update an observation: `PUT` http://localhost:3000/traffic/observations/ES/CAR/2023 with `{ "value": 206577 }`
 - Swagger UI: http://localhost:3000/docs
 - openapi.json: http://localhost:3000/docs-json
+- UI: http://localhost:3001
 
 ## The data
 

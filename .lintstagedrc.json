@@ -5,5 +5,12 @@
   ],
   "apps/api/**/*.{json,md,yml,yaml}": [
     "apps/api/node_modules/.bin/prettier --ignore-path apps/api/.prettierignore --write"
+  ],
+  "apps/ui/**/*.{ts,tsx}": [
+    "apps/ui/node_modules/.bin/prettier --ignore-path apps/ui/.prettierignore --write",
+    "apps/ui/node_modules/.bin/oxlint -c apps/ui/oxlint.json --deny-warnings"
+  ],
+  "apps/ui/**/*.{css,json,md,yml,yaml}": [
+    "apps/ui/node_modules/.bin/prettier --ignore-path apps/ui/.prettierignore --write"
   ]
 }
