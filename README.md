@@ -35,6 +35,14 @@ Current endpoints:
 - openapi.json: http://localhost:3000/docs-json
 - UI: http://localhost:3001
 
+The UI reads the API server-side. It's default value is http://localhost:3000 (http://api:3000 in compose).
+
+The UI's request types are generated from the API's openapi.json file. Regenerate them with:
+
+```bash
+cd apps/ui && npm run api:types
+```
+
 ## The data
 
 The data is from Eurostat's `road_tf_vehmov`(https://ec.europa.eu/eurostat/databrowser/view/road_tf_vehmov/default/table?lang=en), which measures distance travelled in million vehicle-kilometres rather than vehicle counts.

@@ -9,7 +9,8 @@
     "typecheck": "react-router typegen && tsc",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "oxlint -c oxlint.json --deny-warnings app/"
+    "lint": "oxlint -c oxlint.json --deny-warnings app/",
+    "api:types": "openapi-typescript ../api/openapi.json -o app/api.types.ts"
   },
   "dependencies": {
     "@react-router/node": "^8",
@@ -17,7 +18,8 @@
     "isbot": "^5.1.36",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router": "^8"
+    "react-router": "^8",
+    "recharts": "^3.10.1"
   },
   "devDependencies": {
     "@react-router/dev": "^8",
@@ -25,6 +27,7 @@
     "@types/node": "^22",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "openapi-typescript": "^7.13.0",
     "oxlint": "^1.82.0",
     "prettier": "^3.9.6",
     "tailwindcss": "^4.2.2",

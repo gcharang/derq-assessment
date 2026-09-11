@@ -1,7 +1,9 @@
-# Regenerates and commits the openapi.json file when API source changes, needs running db
+# Regenerates and commits the openapi.json file and the UI types derived from it
+# when API source changes, needs running db
 if git diff --cached --name-only | grep -q '^apps/api/src/'; then
 	npm --prefix apps/api run openapi:generate
-	git add apps/api/openapi.json
+	npm --prefix apps/ui run api:types
+	git add apps/api/openapi.json apps/ui/app/api.types.ts
 fi
 
 npx lint-staged
