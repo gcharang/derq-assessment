@@ -53,6 +53,20 @@ The data extract is committed at `apps/api/src/traffic/data/road-tf-vehmov.json`
 apps/api/src/scripts/fetch-snapshot.sh
 ```
 
+## Architecture
+
+```
+Eurostat extract -> seed -> Postgres -> API -> UI loader -> charts
+```
+
+`apps/api` is NestJS on Node 24. `apps/ui` is react router 8 with SSR, tailwindcss and recharts with postgres sits behind the API.
+
+Requests and responses are constrained by zod schemas. Each one gives the typescript type, validates the incoming body and path params, and becomes the OpenAPI entry generating the `openapi.json` file. The pre-commit hook regenerates it and the UI types are built from it automatically, so that the UI can consume it directly, easily. CI makes sure the committed copy doesn't go stale.
+
+Eurostat is the data source, we use `fetch-snapshot.sh` to fetch the json, trim a slice of it, and then `traffic.data.ts` coverts it into rows, and `npm run db:seed` upserts those rows in our db. The data is committed so that a fresh clone can work without data fetching.
+
+The UI loader runs on the server side, so the API calls run server to server. The edit form posts to an action and then the loader refetches, so the charts always show the database state
+
 ## Scalability
 
 [docs/scalability.md](docs/scalability.md) covers 5, 50 and 500 RPS, with a baseline measured from `npm run load-test`.
